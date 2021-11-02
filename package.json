@@ -1,0 +1,61 @@
+{
+  "name": "hmtask1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "git": "^0.1.5",
+    "jest": "^27.3.0",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "logger": "^0.0.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "selenium-webdriver": "^4.0.0",
+    "sequelize": "^6.6.5",
+    "supertest-as-promised": "^4.0.2",
+    "swagger-autogen": "^2.12.4",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "scripts": {
+    "dev": "nodemon -r dotenv/config app.js",
+    "db:create": "sequelize-cli db:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:g:migration": "sequelize-cli migration:generate --name",
+    "db:g:seed": "sequelize-cli seed:generate --name",
+    "db:seeds": "sequelize-cli db:seed:all",
+    "start": "nodemon app.js",
+    "test": "NODE_ENV=test jest --testPathPattern='./tests/.*\\.test\\.js$' --detectOpenHandles --runInBand --forceExit",
+    "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate ",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "swagger-autogen": "node swagger.js",
+    "sonar": "node sonar-project.js",
+    "test1": "jest --coverage"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setup.js",
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
+  "jestSonar": {
+    "reportPath": "coverage",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
+  },
+  "devDependencies": {
+    "jest-sonar-reporter": "^2.0.0",
+    "nodemon": "^2.0.13",
+    "sequelize-cli": "^6.2.0",
+    "sonarqube-scanner": "^2.8.1",
+    "supertest": "^6.1.6"
+  }
+}
